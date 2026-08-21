@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jie Ma</title>
+<meta name="description" content="Personal homepage of Jie Ma, PhD candidate in Political Science at Washington University in St. Louis.">
+<style>
+  /* ===== 设计变量：改这里就能换整站配色 ===== */
+  :root{
+    --paper:#fcfcfb;        /* 背景 */
+    --ink:#1b1d21;          /* 正文 */
+    --ink-soft:#5d6169;     /* 次要文字 */
+    --accent:#1273D4;       /* journal highlight */
+    --rule:#e2e0da;         /* 分隔线 */
+    --link:#1f4e79;         /* 链接（深学院蓝） */
+    --link-hover:#0f2b47;
+    --serif: "Iowan Old Style", "Charter", Charter, Georgia, "Songti SC", "Noto Serif CJK SC", "Source Han Serif SC", serif;
+    --sans: ui-sans-serif, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --measure: 48rem;       /* 加宽：44rem 塞不下 300px 的照片 */
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --paper:#15171b; --ink:#e7e5e0; --ink-soft:#9aa0a8; --rule:#2c2f35; --link:#8ab4dd; --link-hover:#b6d3ee; }
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--serif); font-size:17px; line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--measure); margin:0 auto; padding:4.5rem 1.5rem 5rem}
+  a{color:var(--link); text-decoration:none; border-bottom:1px solid color-mix(in srgb, var(--link) 35%, transparent)}
+  a:hover{color:var(--link-hover); border-bottom-color:currentColor}
+  a:focus-visible{outline:2px solid var(--link); outline-offset:3px; border-radius:2px}
+  p{margin:0 0 1.1rem}
+
+  /* ===== 页眉 ===== */
+  header{
+    display:flex;
+    align-items:flex-start;      /* 顶部对齐，不再靠 margin-top 硬凑 */
+    gap:2.5rem;
+  }
+  h1{
+    font-size:2.7rem; line-height:1.08; font-weight:600;
+    letter-spacing:-.015em; margin:0 0 .55rem;
+  }
+  .intro{flex:1 1 0; min-width:0}
+  .intro p:last-child{margin-bottom:0}
+
+  .kicker{
+    font-family:var(--sans); font-size:.76rem; font-weight:500;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft);
+    margin:0 0 .4rem; line-height:1.55;
+  }
+  .kicker + p:not(.kicker){margin-top:1.6rem}
+
+  .portrait{
+    flex:none;
+    width:min(240px, 34%);
+    height:auto;
+    margin-top: 0.6rem;            /* 和 h1 的大写字母视觉对齐 */
+    border-radius:2px;
+  }
+
+  @media (max-width:760px){
+    header{flex-direction:column; gap:1.75rem}
+    .portrait{width:200px; align-self:center; margin-top:0; order:-1}
+    h1{font-size:2.2rem}
+  }
+
+  /* ===== 联系方式条 ===== */
+  .meta{
+    display:flex; flex-wrap:wrap; gap:.6rem 1.9rem;
+    font-family:var(--sans); font-size:.85rem;
+    color:var(--ink-soft);
+    padding:1.25rem 0;
+    margin:3rem 0 4.5rem;        /* ← 这里控制和 Publications 的距离 */
+    border-top:1px solid var(--rule);
+    border-bottom:1px solid var(--rule);
+  }
+  .meta a{border-bottom:none}
+  .meta a:hover{border-bottom:1px solid currentColor}
+
+  /* ===== 章节 ===== */
+  section{margin:0 0 4rem}
+  section:last-of-type{margin-bottom:0}
+  h2{
+    font-family:var(--sans); font-size:.72rem; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft);
+    margin:0 0 1.5rem; padding-bottom:.5rem; border-bottom:1px solid var(--rule);
+  }
+
+  /* ===== 论文条目 ===== */
+  .item{margin:0 0 2.4rem}
+  .item:last-child{margin-bottom:0}
+  .title{font-size:1.08rem; line-height:1.4; margin:0 0 .3rem}
+  .authors{color:var(--ink-soft); margin:0 0 .25rem; font-size:.97rem}
+  .authors .me{color:var(--ink)}
+  .authors a{color:inherit; border-bottom:1px solid var(--rule)}
+  .authors a:hover{color:var(--link); border-bottom-color:currentColor}
+  .status{
+    font-family:var(--sans); font-size:.8rem;
+    font-weight:600; color:var(--ink);
+    margin:0 0 .5rem;
+  }
+  .tldr{
+    font-size:1rem; line-height:1.55; margin:0 0 .5rem;
+    padding-left:.85rem; border-left:2px solid var(--accent);
+    color:var(--ink);
+  }
+  .links{font-family:var(--sans); font-size:.78rem; letter-spacing:.02em; display:flex; flex-wrap:wrap; gap:.9rem; margin:.45rem 0 0}
+  .links a{border-bottom:none; text-transform:uppercase; letter-spacing:.08em}
+  .links a::before{content:"↗ "; opacity:.55}
+
+  /* 摘要折叠：点击展开 */
+  details{margin-top:.55rem}
+  summary{
+    cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:.45rem;
+    font-family:var(--sans); font-size:.78rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::before{
+    content:""; width:.5rem; height:.5rem; border-right:1px solid currentColor; border-bottom:1px solid currentColor;
+    transform:rotate(-45deg) translate(-1px,-1px); transition:transform .18s ease;
+  }
+  details[open] summary::before{transform:rotate(45deg) translate(-2px,-2px)}
+  summary:hover{color:var(--ink)}
+  details p{
+    margin:.7rem 0 0; padding-left:1rem; border-left:2px solid var(--rule);
+    font-size:.95rem; color:var(--ink-soft);
+  }
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important} }
+
+  /* ===== 简单列表（在研项目等） ===== */
+  ul.plain{list-style:none; margin:0; padding:0}
+  ul.plain li{margin:0 0 .9rem; line-height:1.55}
+  ul.plain .note{display:block; font-family:var(--sans); font-size:.8rem; color:var(--ink-soft)}
+
+  footer{
+    font-family:var(--sans); font-size:.78rem; color:var(--ink-soft);
+    border-top:1px solid var(--rule); padding-top:1rem; margin-top:4.5rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ 页眉：姓名 / 简介 / 照片 ============ -->
+  
+      <h1>Jie Ma</h1>
+      <p class="kicker">PhD Candidate in Political Science &middot; Washington University in St. Louis</p>
+  <header>
+    <div class="intro">    
+      <p>
+        Welcome to my homepage. I am a PhD candidate in Political Science at Washington University in St. Louis.
+        My research lies at the intersection of formal theory, the political economy of information and organizational politics.
+        I am interested in why institutions designed to extract information often undercut the incentives to provide it, and I use models
+        of strategic disclosure and information acquisition to identify when transparency, oversight and deliberation improve the quality
+        of collective decisions&mdash;and when they do not.
+      </p>
+    </div>
+
+    <img class="portrait"
+         src="photo.jpg"
+         width="240"
+         alt="Jie Ma">
+  </header>
+
+  <div class="meta">
+    <span>Email: <a href="mailto:jie.m@wustl.edu">jie.m@wustl.edu</a></span>
+    <span><a href="cv.pdf">Curriculum Vitae</a></span>
+    <span><a href="https://scholar.google.com/citations?user=Z3MQ_bsAAAAJ&hl=zh-CN&oi=sra">Google Scholar</a></span>
+    <!--<span><a href="https://github.com/">GitHub</a></span>-->
+  </div>
+
+  <!-- ============ 发表 / 在投 ============ -->
+  <section>
+    <h2>Publications &amp; Under Review</h2>
+
+    <article class="item">
+      <p class="title"><a href="https://example.com/paper1">Democratic Accountability with Citizen Coproduction</a></p>
+      <p class="authors">with <a href="https://www.keith-schnakenberg.com">Keith E. Schnakenberg</a> and <a href="http://www.ianrturner.com">Ian R. Turner</a></p>
+      <p class="status">Forthcoming, <em>American Political Science Review</em></p>
+      <p class="tldr">When policy requires citizens to act, who is to blame when it fails?</p>
+
+      <details>
+        <summary>Abstract</summary>
+        <p>
+          Many policies require citizens to actively and voluntarily participate in their implementation in order to produce successful outcomes,
+          a situation referred to as citizen coproduction. Though citizen coproduction is necessary in many policy areas, it could create difficulties
+          for democratic accountability because citizens and politicians share responsibility for policy failures and the attribution of blame may be difficult.
+          We analyze the problem of democratic accountability with citizen coproduction in the context of a model in which politicians, who vary with respect to their competence at selecting policies,
+          choose whether or not to implement policies whose success depends on the coproduction choices of citizens. For citizens, the problem is one of attribution: when citizen coproduction is low,
+          it may be hard to select good incumbents because policy failures are frequent even in light of good policy choices. Furthermore, incumbent decisions anticipate these effects, which sometimes
+          implies that incumbents are less likely to choose reforms when they are more likely to be successful.
+        </p>
+      </details>
+      <p class="links">
+        <a href="https://osf.io/preprints/osf/gehwz_v1">PDF</a>
+      </p>
+    </article>
+  </section>
+
+  <!-- ============ 工作论文 ============ -->
+  <section>
+    <h2>Working Papers</h2>
+
+    <article class="item">
+      <p class="title"><a href="#">Disclosure under Scrutiny: A Theory of Investigation and Information Withholding</a></p>
+      <p class="status">First draft: July 2024 &middot; Current version: July 2026</p>
+      <p class="tldr">Why does investigation discourage the very disclosure it is meant to elicit?</p>
+      <details>
+        <summary>Abstract</summary>
+        <p>Institutions that scrutinize wrongdoing are expected to bring more of it to light.
+We show that whether they do depends on what an investigation reveals, not on
+whether one occurs. We study a disclosure game in which an agent privately learns
+a damaging fact and chooses whether to reveal it, and in which silence may trigger
+an investigation that reports a verifiable finding. Absent investigation, everyone
+who knowingly conceals is worse than he is, so disclosure is his only way to
+separate from them. An investigation that establishes exactly what the agent knew
+lets him be judged as himself rather than alongside those concealers, and
+disclosure falls. An investigation that reports only that something was concealed
+does the opposite: being caught is no longer a shelter but a stigma, since it
+again groups him with concealers who are uniformly worse, and disclosure can rise above its
+no-investigation level. The design problem of scrutiny is therefore not how much to
+investigate, but how finely to report what is found.</p>
+      </details>
+      <p class="links"><a href="disclosure_scrutiny.pdf">PDF</a></p>
+    </article>
+
+    <article class="item">
+      <p class="title"><a href="#">Knowledge Production and Disclosure in Organizations</a></p>
+      <p class="status">First draft: June 2026 &middot; Current version: July 2026</p>
+      <p class="tldr">Why would a decision maker want advisers who are biased?</p>
+      <details>
+        <summary>Abstract</summary>
+        <p>Why do biased advisers sometimes improve collective decisions? I model a sequence of biased Senders who inherit accumulated knowledge, choose whether to run a costly experiment, and pass information down until it reaches a Receiver who decides for all. Bias cuts both ways: biased Senders are reluctant to relay evidence, but because they are hard to persuade, they have the strongest incentive to produce counterevidence against the prevailing consensus. I characterize the biases sustaining an all-honest equilibrium and show the set is nested along the chain &mdash; as deliberation lengthens, only more extreme Senders still experiment. Larger groups deliberate less effectively for the same reason. I then compare two organizational forms: sequential talk, in which each Sender observes only what her immediate predecessor passes down and speaks once before handing off, and group talk, in which all Senders share a common pool of knowledge and contribute to it in parallel. Sequential talk degrades faster than group talk but withstands new entrants, while group talk can collapse when members are added, so the optimal deliberative structure depends on the distribution of biases in the organization.</p>
+      </details>
+      <p class="links"><a href="#">Coming Soon</a></p>
+    </article>
+  </section>
+
+  <!-- ============ 在研项目 ============ -->
+  <!--<section>
+    <h2>Works in Progress</h2>
+    <ul class="plain">
+      <li>Project Title One <span class="note">with Coauthor A and Coauthor B</span></li>
+      <li>Project Title Two <span class="note">with Coauthor C · pilot in progress</span></li>
+      <li>Project Title Three <span class="note">IRB approved · data collection begins Fall 2026</span></li>
+    </ul>
+  </section>-->
+
+  <footer>Last updated: August 2026</footer>
+</div>
+</body>
+</html>
